@@ -237,8 +237,8 @@ public:
     return result;
   }
 
-  /// Returns the identity of the string `s` if it is in this database or the maximum representable
-  /// value of `std::size_t` otherwise.
+  /* Returns the identity of the string `s` if it is in this database or the maximum representable
+  value of `std::size_t` otherwise. */
   std::size_t find_string(std::string const& s) const {
     auto o = string_offset(s);
     if ((o < string_table_size) && (string_table()[o] != 0)) {

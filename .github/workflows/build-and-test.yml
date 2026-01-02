@@ -16,20 +16,20 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Build software
+    - name: Build 
       run: make
 
-    - name: Run tests
+    - name: Test
       run: make test
 
-    - name: Publish binary
+    - name: Package
       if: github.event_name == 'release'
       run: |
           mkdir -p dist
           cp ./build/main dist/dummydb-linux-amd64
           chmod +x dist/dummydb-linux-amd64
 
-    - name: Upload Release Asset
+    - name: Release
       uses: softprops/action-gh-release@v2
       if: github.event_name == 'release'
       with:
