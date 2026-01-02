@@ -12,7 +12,7 @@ DEP := $(OBJ:.o=.d)
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++20
 
-all: $(BUILD_DIR	)/main
+all: $(BUILD_DIR)/main
 
 $(BUILD_DIR)/$(TARGET): $(OBJ)
 	$(CXX) $(OBJ) -o $@ $(LDFLAGS)
