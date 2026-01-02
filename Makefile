@@ -10,7 +10,13 @@ OBJ := $(SRC:%=build/%.o)
 DEP := $(OBJ:.o=.d)
 
 CXX = g++
-CXXFLAGS = -Wall -Wextra -Wpedantic -Werror -std=c++20
+BASE_CXXFLAGS = -Wall -Wextra -Wpedantic -Werror -std=c++20
+
+ifeq ($(BUILD),release)
+    CXXFLAGS = $(BASE_CXXFLAGS) -O3 -DNDEBUG
+else
+    CXXFLAGS = $(BASE_CXXFLAGS) -O0 -g
+endif
 
 all: $(BUILD_DIR)/main
 
@@ -29,6 +35,13 @@ $(BUILD_DIR)/test-all: $(TEST_DIR)/test-all.cpp
 	mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -I $(INCLUDE_DIR) -o $@ $<
 
-.PHONY: clean
+.PHONY: debug release
+
+debug:
+	$(MAKE) BUILD=debug
+
+release:
+	$(MAKE) BUILD=release
+
 clean:
-	rm -r $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
