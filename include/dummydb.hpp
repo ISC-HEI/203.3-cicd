@@ -3,6 +3,9 @@
 #include <string>
 #include <variant>
 #include <vector>
+#include <cstdint>
+#include <stdexcept>
+#include <limits>
 
 namespace ddb {
 
@@ -21,7 +24,7 @@ enum FieldType : std::uint8_t {
 };
 
 /// The value of a field.
-using Value = std::variant<std::int32_t, std::float_t, std::string>;
+using Value = std::variant<std::int32_t, double, std::string>;
 
 /// Returns `address` advanced by `byte_offset` bytes.
 void* advanced(void* address, std::size_t byte_offset) {
@@ -188,7 +191,7 @@ public:
           continue;
 
         case Float:
-          *static_cast<std::float_t*>(static_cast<void*>(p++)) = std::get<1>(record[i]);
+          *static_cast<double*>(static_cast<void*>(p++)) = std::get<1>(record[i]);
           continue;
 
         case String:
@@ -221,7 +224,7 @@ public:
           continue;
 
         case Float:
-          result.emplace_back(*static_cast<std::float_t*>(static_cast<void*>(p++)));
+          result.emplace_back(*static_cast<double*>(static_cast<void*>(p++)));
           continue;
 
         case String:

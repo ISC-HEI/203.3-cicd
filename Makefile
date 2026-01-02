@@ -10,7 +10,7 @@ OBJ := $(SRC:%=build/%.o)
 DEP := $(OBJ:.o=.d)
 
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++20
+CXXFLAGS = -Wall -Wextra -Wpedantic -Werror -std=c++20
 
 all: $(BUILD_DIR)/main
 
