@@ -1,10 +1,13 @@
 # =========================
 # Build stage
 # =========================
-FROM gcc:13 AS builder
+FROM debian:bookworm AS builder
 
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential make && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -20,7 +23,7 @@ RUN make clean && make && make test
 # =========================
 # Runtime stage
 # =========================
-FROM ubuntu:24.04
+FROM debian:bookworm-slim
 
 # Create a non-root user
 RUN useradd -m appuser

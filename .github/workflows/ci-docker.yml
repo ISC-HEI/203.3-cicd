@@ -1,4 +1,4 @@
-name: CI
+name: CI (Docker)
 permissions:
   contents: read
   packages: write

@@ -62,3 +62,7 @@ You can test this distribution of Dummy DB using the following command:
 ```bash
 make test
 ```
+
+## CI/CD
+
+TO BE COMPLETED 
